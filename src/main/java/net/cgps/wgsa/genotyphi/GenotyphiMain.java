@@ -143,7 +143,7 @@ public class GenotyphiMain {
 
         final Path outFile = Paths.get(workingDirectory.toString(), resultString.getAssemblyId() + "_paarsnp.jsn");
 
-        this.logger.info("Writing {}", outFile.toAbsolutePath().toString());
+        this.logger.debug("Writing {}", outFile.toAbsolutePath().toString());
 
         try (final BufferedWriter writer = Files.newBufferedWriter(outFile)) {
           writer.write(resultString.toPrettyJson());

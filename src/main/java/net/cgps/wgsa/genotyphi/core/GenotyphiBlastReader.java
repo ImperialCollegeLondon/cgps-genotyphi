@@ -103,9 +103,9 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
     this.logger.debug("{}", foundVariants.stream().map(genotyphiMutation -> genotyphiMutation.toJson()).collect(Collectors.joining("\n")));
 
     final Set<GenotyphiSchema.GenotyphiGroup> collectedGroups = foundVariants.parallelStream()
-        .peek(variant -> this.logger.info("Variant={}", variant.toString()))
+        .peek(variant -> this.logger.debug("Variant={}", variant.toString()))
         .map(GenotyphiMutation::getGenotyphiGroup)
-        .peek(group -> this.logger.info("Group: {}", group.toString()))
+        .peek(group -> this.logger.debug("Group: {}", group.toString()))
         .collect(Collectors.toSet());
 
     final GenotyphiResult.AggregatedAssignments potentialGroups = FixNesting.buildDefault().apply(collectedGroups);

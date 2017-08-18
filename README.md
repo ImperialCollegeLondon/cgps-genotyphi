@@ -75,7 +75,7 @@ Usage
 
 To run genotyphi on a single Salmonella _Typhi_ FASTA file in the local directory using the container. An output file `{assembly}_genotyphi.jsn` is created.
 
-NB If you used the recommended docker build process, substitute `genotyphi` for `registry.gitlab.com/cgps/cgps-genotyphi/genotyphi`.
+NB If you used the recommended docker build process, substitute `genotyphi` for `registry.gitlab.com/cgps/cgps-genotyphi`.
 
 `docker run --rm -v $PWD:/data genotyphi -i assembly.fa`
 
