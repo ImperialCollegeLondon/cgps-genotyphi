@@ -109,33 +109,56 @@ Currently only a JSON output is supported.
 
 A complete example of the JSON format can be found in [here](/examples/output.jsn)
 
-The key field of interest to most will be the `resistanceProfile` field. For each antibiotic, the resistance state (e.g. `RESISTANT`) and resistance groups that have been found are listed.
-
-The individual results and detailed BLAST data can be found in the `paarResult` & `snparResult` fields.
-
-```
 {
-      "resistanceState": "RESISTANT",
-      "resistanceSets": [
-        {
-          "effect": "RESISTANT",
-          "resistanceSetName": "TEM-1",
-          "agents": [
-            "AMP"
-          ],
-          "elementIds": [
-            "TEM-1"
-          ],
-          "modifiers": {}
-        }
-      ],
-      "agent": {
-        "name": "AMP",
-        "fullName": "Ampicillin",
-        "type": "Beta-lactam"
-      }
+  "assemblyId" : "my_assembly",
+  "genotype" : "3.3",
+  "foundLoci" : 68.0,
+  "aggregatedAssignments" : {
+    "primaryGroups" : [ {
+      "depth" : "PRIMARY",
+      "code" : [ "3" ]
+    } ],
+    "cladeGroups" : [ {
+      "depth" : "CLADE",
+      "code" : [ "3", "3" ]
+    } ],
+    "subcladeGroups" : [ ]
+  },
+  "genotyphiMutations" : [ {
+    "variant" : "T",
+    "genotyphiGroup" : {
+      "depth" : "CLADE",
+      "code" : [ "3", "3" ]
     },
-```
+    "location" : 177
+  }, {
+    "variant" : "A",
+    "genotyphiGroup" : {
+      "depth" : "PRIMARY",
+      "code" : [ "3" ]
+    },
+    "location" : 989
+  } ],
+  "blastResults" : [ {
+    "blastSearchStatistics" : {
+      "librarySequenceId" : "STY3940",
+      "librarySequenceStart" : 1,
+      "querySequenceId" : ".12045_3_90.22",
+      "querySequenceStart" : 55709,
+      "percentIdentity" : 100.0,
+      "evalue" : 0.0,
+      "reversed" : false,
+      "librarySequenceStop" : 1401,
+      "querySequenceStop" : 57109,
+      "librarySequenceLength" : 1401
+    },
+    "mutations" : [ ],
+    "queryMatchSequence" : "GTGTCA...",
+    "referenceMatchSequence" : "GTGTCA..."
+  },
+  ...
+  ]
+}
 
 #### Naming Docker Builds
 
