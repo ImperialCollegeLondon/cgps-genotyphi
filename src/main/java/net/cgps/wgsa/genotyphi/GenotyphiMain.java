@@ -95,7 +95,7 @@ public class GenotyphiMain {
 
     final GenotyphiSchema schema = new SchemaReader().apply(databasePath);
 
-    final GenotyphiRunner runner = new GenotyphiRunner(schema, workingDirectory);
+    final GenotyphiRunner runner = new GenotyphiRunner(schema, databasePath);
 
     final Consumer<GenotyphiResult> writer = this.getConsumer(toStdout, workingDirectory);
 

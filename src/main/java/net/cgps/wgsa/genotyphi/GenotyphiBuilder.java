@@ -21,9 +21,11 @@ public class GenotyphiBuilder {
     final GenotyphiSchema genotyphiSchema = new SchemaBuilder().apply(Paths.get(inputPath.toString(), "data.csv"));
 
     try {
-      Files.write(Paths.get(databasePath.toString(), "schema.jsn"), genotyphiSchema.toJson().getBytes(), StandardOpenOption.CREATE);
+      final Path schemaPath = Paths.get(databasePath.toString(), "schema.jsn");
+      this.logger.info("Writing schema to {}", schemaPath.toString());
+      Files.write(schemaPath, genotyphiSchema.toJson().getBytes(), StandardOpenOption.CREATE);
     } catch (final IOException e) {
-      this.logger.error("Failed to write genotyphi DB. {}", e);
+      this.logger.error("Failed to write genotyphi {}", e);
       throw new RuntimeException(e);
     }
 

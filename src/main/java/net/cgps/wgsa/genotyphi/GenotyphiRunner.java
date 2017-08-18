@@ -7,7 +7,6 @@ import net.cgps.wgsa.genotyphi.lib.BlastRunner;
 import net.cgps.wgsa.genotyphi.lib.MutationReader;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.function.Function;
 
 public class GenotyphiRunner implements Function<Path, GenotyphiResult> {
@@ -31,7 +30,7 @@ public class GenotyphiRunner implements Function<Path, GenotyphiResult> {
         "-task", "blastn",
         "-outfmt", "5",
         "-query", assemblyFile.toAbsolutePath().toString(),
-        "-db", Paths.get(this.resourceDirectory.toString(), "genotyphi").toAbsolutePath().toString(),
+        "-db",this.resourceDirectory.toString() + "/genotyphi",
         "-perc_identity", "80",
         "-evalue", "1e-60",
         "-num_alignments", "200",
