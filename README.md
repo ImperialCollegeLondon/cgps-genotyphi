@@ -1,5 +1,5 @@
 # cgps-genotyphi
-CGPS implementation of (Genotyphi by Kat Holt)[https://github.com/katholt/genotyphi] for assembled genomes. Genotyphi is a typing scheme for _Salmonella_ Typhi that uses a set a curated mutations to assign strains to a particular labelled clade.
+CGPS implementation of (Genotyphi by Kat Holt _et al_)[https://github.com/katholt/genotyphi] for assembled genomes. Genotyphi is a typing scheme for _Salmonella_ Typhi that uses a set a curated mutations to assign strains to a particular labelled clade.
 
 For a full description of Genotyphi please visit the above link, and read the (original paper)[https://www.nature.com/articles/ncomms12827/]. 
 
@@ -30,7 +30,7 @@ unzip code-genotyphi-master.zip
 2. Installation
 ```
 cd genotyphi
-docker build -t genotyphi-builder -f builder.Dockerfile .
+docker build -t genotyphi-builder -f Dockerfile .
 # The next command actually builds genotyphi as a JAR and as a container
 docker run -it --rm --name genotyphi -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)":/usr/src/mymaven -v ~/.docker:/root/.docker -w /usr/src/mymaven genotyphi-builder mvn package
 ```
