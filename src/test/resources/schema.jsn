@@ -1,0 +1,1132 @@
+{
+  "genes": [
+    {
+      "sequenceId": "STY3940",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "4",
+              "2",
+              "2"
+            ]
+          },
+          "location": 1152
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3622",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "9"
+            ]
+          },
+          "location": 195
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3226",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "location": 927
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1683",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "4",
+              "2",
+              "3"
+            ]
+          },
+          "location": 502
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2335",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "1",
+              "1",
+              "4"
+            ]
+          },
+          "location": 81
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2413",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "3",
+              "1"
+            ]
+          },
+          "location": 684
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0994",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "4",
+              "2",
+              "1"
+            ]
+          },
+          "location": 312
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4239",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "1",
+              "1"
+            ]
+          },
+          "location": 267
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2853",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "2",
+              "1"
+            ]
+          },
+          "location": 300
+        },
+        {
+          "variant": "G",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "3",
+              "5"
+            ]
+          },
+          "location": 177
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3228",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "2",
+              "3"
+            ]
+          },
+          "location": 717
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1689",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "PRIMARY",
+            "code": [
+              "4"
+            ]
+          },
+          "location": 105
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3584",
+      "variants": [
+        {
+          "variant": "G",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "2",
+              "4"
+            ]
+          },
+          "location": 621
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4154",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "6"
+            ]
+          },
+          "location": 73
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0031",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "1",
+              "2"
+            ]
+          },
+          "location": 195
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0548",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          "location": 117
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0829",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "8"
+            ]
+          },
+          "location": 93
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1918",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "5",
+              "1"
+            ]
+          },
+          "location": 738
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0707",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "2",
+              "3"
+            ]
+          },
+          "location": 255
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3775",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "0",
+              "1",
+              "1"
+            ]
+          },
+          "location": 825
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0144",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "2",
+              "1"
+            ]
+          },
+          "location": 297
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4468",
+      "variants": [
+        {
+          "variant": "G",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "2",
+              "2"
+            ]
+          },
+          "location": 156
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4227",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "7"
+            ]
+          },
+          "location": 222
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4268",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "0",
+              "2"
+            ]
+          },
+          "location": 237
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0421",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "0",
+              "2"
+            ]
+          },
+          "location": 387
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4741",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "2",
+              "2"
+            ]
+          },
+          "location": 444
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0104",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "0",
+              "1",
+              "3"
+            ]
+          },
+          "location": 330
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1951",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "0",
+              "0",
+              "3"
+            ]
+          },
+          "location": 1302
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1910",
+      "variants": [
+        {
+          "variant": "C",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "0",
+              "0",
+              "2"
+            ]
+          },
+          "location": 996
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0304",
+      "variants": [
+        {
+          "variant": "C",
+          "genotyphiGroup": {
+            "depth": "PRIMARY",
+            "code": [
+              "1"
+            ]
+          },
+          "location": 117
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2526",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "1",
+              "1",
+              "2"
+            ]
+          },
+          "location": 273
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0303",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "3",
+              "1"
+            ]
+          },
+          "location": 354
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1876",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "4",
+              "1"
+            ]
+          },
+          "location": 126
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4063",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "3",
+              "5"
+            ]
+          },
+          "location": 411
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2682",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "1"
+            ]
+          },
+          "location": 283
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2080",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "3",
+              "2"
+            ]
+          },
+          "location": 468
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4419",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "1",
+              "2",
+              "1"
+            ]
+          },
+          "location": 588
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0419",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "2",
+              "4"
+            ]
+          },
+          "location": 351
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1906",
+      "variants": [
+        {
+          "variant": "C",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "0",
+              "1"
+            ]
+          },
+          "location": 480
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3203",
+      "variants": [
+        {
+          "variant": "C",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "3",
+              "1"
+            ]
+          },
+          "location": 9
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0176",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "5",
+              "4"
+            ]
+          },
+          "location": 969
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4059",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "2"
+            ]
+          },
+          "location": 768
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0255",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "0",
+              "1",
+              "2"
+            ]
+          },
+          "location": 196
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2513",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "4",
+              "3",
+              "1"
+            ]
+          },
+          "location": 1047
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0653",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "0",
+              "1"
+            ]
+          },
+          "location": 547
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1588",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "2",
+              "5"
+            ]
+          },
+          "location": 342
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3527",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "3",
+              "3"
+            ]
+          },
+          "location": 177
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2438",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "3",
+              "2"
+            ]
+          },
+          "location": 819
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY0776",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "0",
+              "0",
+              "1"
+            ]
+          },
+          "location": 333
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1260",
+      "variants": [
+        {
+          "variant": "G",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "0",
+              "1"
+            ]
+          },
+          "location": 651
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4497",
+      "variants": [
+        {
+          "variant": "C",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "2",
+              "2"
+            ]
+          },
+          "location": 1092
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4134",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "4",
+              "1",
+              "1"
+            ]
+          },
+          "location": 1623
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4333",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "2",
+              "1"
+            ]
+          },
+          "location": 294
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1220",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "4"
+            ]
+          },
+          "location": 360
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2507",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "4",
+              "1"
+            ]
+          },
+          "location": 588
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3874",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "5",
+              "2"
+            ]
+          },
+          "location": 1317
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2863",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "1",
+              "1"
+            ]
+          },
+          "location": 154
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3432",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "3"
+            ]
+          },
+          "location": 909
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY1897",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "5",
+              "1"
+            ]
+          },
+          "location": 54
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY4803",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "1",
+              "1",
+              "3"
+            ]
+          },
+          "location": 213
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2867",
+      "variants": [
+        {
+          "variant": "C",
+          "genotyphiGroup": {
+            "depth": "PRIMARY",
+            "code": [
+              "2"
+            ]
+          },
+          "location": 515
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3316",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "3",
+              "4"
+            ]
+          },
+          "location": 30
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3196",
+      "variants": [
+        {
+          "variant": "A",
+          "genotyphiGroup": {
+            "depth": "PRIMARY",
+            "code": [
+              "3"
+            ]
+          },
+          "location": 989
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2781",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "CLADE",
+            "code": [
+              "4",
+              "2"
+            ]
+          },
+          "location": 210
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2937",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "3",
+              "3"
+            ]
+          },
+          "location": 48
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3949",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "5",
+              "3"
+            ]
+          },
+          "location": 586
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY2819",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "2",
+              "1",
+              "5"
+            ]
+          },
+          "location": 168
+        }
+      ]
+    },
+    {
+      "sequenceId": "STY3909",
+      "variants": [
+        {
+          "variant": "T",
+          "genotyphiGroup": {
+            "depth": "SUBCLADE",
+            "code": [
+              "3",
+              "1",
+              "2"
+            ]
+          },
+          "location": 177
+        }
+      ]
+    }
+  ]
+}

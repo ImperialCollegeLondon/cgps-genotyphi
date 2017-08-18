@@ -85,6 +85,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
     // For each match check if the genotyphi variants are present, and gather those that are
     final Collection<GenotyphiMutation> foundVariants = results
         .stream()
+        .filter(result -> !result.getMutations().isEmpty())
         .flatMap(result -> {
 
           final GenotyphiGene gene = this.genotyphiSchema.get(result.getBlastSearchStatistics().getLibrarySequenceId());

@@ -84,7 +84,7 @@ public class MutationBuilder {
   private String determineSequence(final String sequence) {
 
     if (this.reversed) {
-      return DnaSequence.complement(DnaSequence.reverseTranscribe(sequence));
+      return DnaSequence.reverseTranscribe(sequence).toUpperCase();
     } else {
       return sequence.toUpperCase();
     }
