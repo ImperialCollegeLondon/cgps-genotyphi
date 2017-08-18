@@ -108,7 +108,7 @@ Currently only a JSON output is supported.
 #### JSON
 
 A complete example of the JSON format can be found in [here](/examples/output.jsn)
-
+```
 {
   "assemblyId" : "my_assembly",
   "genotype" : "3.3",
@@ -159,7 +159,7 @@ A complete example of the JSON format can be found in [here](/examples/output.js
   ...
   ]
 }
-
+```
 #### Naming Docker Builds
 
 Container tags are automatically generated during the build phase by Maven using [jgitver](https://github.com/jgitver/jgitver).
