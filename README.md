@@ -105,8 +105,8 @@ NB not pretty printed, one record per line
 
 1. [Text](#text-format)
 1. [JSON](#json-format)
-1. [Pretty JSON](#json-pretty-format)
-1. [Simple JSON](#json-simple-format)
+1. [Pretty JSON](#pretty-json-format)
+1. [Simple JSON](#simple-json-format)
 
 ### Text Format
 
