@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 /**
- * The base class for Jsonnable objects. Provides JSON_PRETTY serialisation/deserialisation ob User: cyeats Date: 10/23/13
+ * The base class for Jsonnable objects. Provides PRETTY_JSON serialisation/deserialisation ob User: cyeats Date: 10/23/13
  * Time: 1:53 PM
  */
 public abstract class Jsonnable {
@@ -28,37 +28,37 @@ public abstract class Jsonnable {
 
     final ObjectMapper mapper = new ObjectMapper();
 
-    // Create a StringWriter to write the JSON_PRETTY string to
+    // Create a StringWriter to write the PRETTY_JSON string to
     final StringWriter writer = new StringWriter();
 
     try {
       mapper.writerWithDefaultPrettyPrinter().writeValue(writer, object);
     } catch (final IOException e) {
       // I don't think this can happen since there is no IO...
-      LoggerFactory.getLogger(object.getClass()).error("IOException thrown when writing JSON_PRETTY string.", e);
+      LoggerFactory.getLogger(object.getClass()).error("IOException thrown when writing PRETTY_JSON string.", e);
     }
 
     return writer.toString();
   }
 
   /**
-   * Method is specific to classes that are expected to be serialised as JSON_PRETTY
+   * Method is specific to classes that are expected to be serialised as PRETTY_JSON
    *
    * @param jsonnableObject - an object that conforms to the Jackson requirements for serialisation.
-   * @return A pretty representation of the JSON_PRETTY string.
+   * @return A pretty representation of the PRETTY_JSON string.
    */
   public static String toPrettyJson(final Jsonnable jsonnableObject) {
 
     final ObjectMapper mapper = new ObjectMapper();
 
-    // Create a StringWriter to write the JSON_PRETTY string to
+    // Create a StringWriter to write the PRETTY_JSON string to
     final StringWriter writer = new StringWriter();
 
     try {
       mapper.writerWithDefaultPrettyPrinter().writeValue(writer, jsonnableObject);
     } catch (final IOException e) {
       // I don't think this can happen since there is no IO...
-      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing JSON_PRETTY string.", e);
+      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing PRETTY_JSON string.", e);
     }
 
     return writer.toString();
@@ -83,7 +83,7 @@ public abstract class Jsonnable {
       new ObjectMapper().writer().writeValue(writer, jsonnableObject);
     } catch (final IOException e) {
       // I don't think this can happen since there is no IO...
-      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing JSON_PRETTY string.", e);
+      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing PRETTY_JSON string.", e);
     }
     return writer.toString();
 

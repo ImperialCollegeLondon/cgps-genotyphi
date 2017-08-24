@@ -7,14 +7,14 @@ import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GenotyphiMain {
 
@@ -83,7 +83,7 @@ public class GenotyphiMain {
           throw new RuntimeException("Can't find input file or directory " + input.toAbsolutePath().toString());
         }
 
-        new GenotyphiMain().run(fastas, workingDirectory, commandLine.hasOption('o'), Paths.get(databasePath));
+        new GenotyphiMain().run(fastas, workingDirectory, commandLine.hasOption('o'), Paths.get(databasePath), Format.valueOf(commandLine.getOptionValue('f', "text").toUpperCase()));
       }
     } catch (final Exception e) {
       LoggerFactory.getLogger(GenotyphiMain.class).error("Failed to run due to: ", e);
@@ -103,7 +103,7 @@ public class GenotyphiMain {
 
     final Option outputOption = Option.builder("o").longOpt("outfile").argName("Create output file").desc("Use this flag if you want the result written to STDOUT rather than file.").build();
 
-    final Option formatOption = Option.builder("f").longOpt("format").argName("Select the output format from 'text' (default),'json'").build();
+    final Option formatOption = Option.builder("f").longOpt("format").hasArg().argName("Select the output format from " + Format.getFormats()).build();
 
     final Options options = new Options();
     options.addOption(assemblyListOption)
@@ -124,6 +124,8 @@ public class GenotyphiMain {
 
     final Consumer<GenotyphiResult> writer = this.getConsumer(format, toStdout, workingDirectory);
 
+    this.logger.info("Writing format {}", format.name().toLowerCase());
+
     fastas
         .stream()
         .map(runner)
@@ -136,38 +138,32 @@ public class GenotyphiMain {
 
     switch (format) {
       case JSON:
-        format = genotyphiResult -> genotyphiResult.toJson();
-      case JSON_PRETTY:
-        return genotyphiResult -> genotyphiResult.toPrettyJson();
+        formatter = genotyphiResult -> genotyphiResult.toJson();
+        break;
+      case PRETTY_JSON:
+        formatter = genotyphiResult -> genotyphiResult.toPrettyJson();
+        break;
+      case SIMPLE_JSON:
+        formatter = genotyphiResult -> GenotyphiResultSimple.fromFullResult(genotyphiResult).toPrettyJson();
+        break;
       case TEXT:
-        return genotyphiResult -> {
-
-        };
-      case JSON_SIMPLE:
-        return genotyphiResult -> GenotyphiResultSimple.fromFullResult(genotyphiResult).toPrettyJson();
+      default:
+        formatter = new TextFormatter();
     }
 
     if (isToStdout) {
       return new StdoutWriter(formatter);
     } else {
-      return resultString -> {
-
-        final Path outFile = Paths.get(workingDirectory.toString(), resultString.getAssemblyId() + "_genotyphi.jsn");
-
-        this.logger.debug("Writing {}", outFile.toAbsolutePath().toString());
-
-        try (final BufferedWriter writer = Files.newBufferedWriter(outFile)) {
-          writer.write(resultString.toPrettyJson());
-        } catch (IOException e) {
-          this.logger.error("Failed to write output for {}", resultString.getAssemblyId());
-          throw new RuntimeException(e);
-        }
-      };
+      return new FileWriter(formatter, workingDirectory);
     }
   }
 
   public enum Format {
-    JSON, JSON_PRETTY, TEXT, JSON_SIMPLE
+    TEXT, JSON, PRETTY_JSON, SIMPLE_JSON;
+
+    public static String getFormats() {
+      return Stream.of(Format.values()).map(Format::name).map(String::toLowerCase).collect(Collectors.joining(", "));
+    }
   }
 }
 
