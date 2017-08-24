@@ -1,11 +1,11 @@
 package net.cgps.wgsa.genotyphi.core;
 
-import net.cgps.wgsa.genotyphi.lib.AbstractJsonnable;
+import net.cgps.wgsa.genotyphi.lib.Jsonnable;
 
 import java.util.*;
 import java.util.stream.Stream;
 
-public class GenotyphiSchema extends AbstractJsonnable {
+public class GenotyphiSchema extends Jsonnable {
 
   private final Collection<GenotyphiGene> genes;
 

@@ -2,19 +2,20 @@ package net.cgps.wgsa.genotyphi;
 
 import net.cgps.wgsa.genotyphi.core.GenotyphiMutation;
 import net.cgps.wgsa.genotyphi.core.GenotyphiSchema;
-import net.cgps.wgsa.genotyphi.lib.AbstractJsonnable;
+import net.cgps.wgsa.genotyphi.lib.Jsonnable;
 import net.cgps.wgsa.genotyphi.lib.MutationSearchResult;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-public class GenotyphiResult extends AbstractJsonnable{
+public class GenotyphiResult extends Jsonnable {
 
   private final String assemblyId;
   private final String genotype;
-  private final Collection<GenotyphiMutation> genotyphiMutations;
+  private final Map<String, Collection<GenotyphiMutation>> genotyphiMutations;
   private final AggregatedAssignments data;
   private final Collection<MutationSearchResult> blastResults;
   private final float foundLoci;
@@ -23,10 +24,10 @@ public class GenotyphiResult extends AbstractJsonnable{
   @SuppressWarnings("unused")
   private GenotyphiResult() {
 
-    this("", "", Collections.emptyList(), null, Collections.emptyList(), 0f);
+    this("", "", Collections.emptyMap(), null, Collections.emptyList(), 0f);
   }
 
-  public GenotyphiResult(final String assemblyId, final String genotype, final Collection<GenotyphiMutation> genotyphiMutations, final AggregatedAssignments data, final Collection<MutationSearchResult> blastResults, final float foundLoci) {
+  public GenotyphiResult(final String assemblyId, final String genotype, final Map<String, Collection<GenotyphiMutation>> genotyphiMutations, final AggregatedAssignments data, final Collection<MutationSearchResult> blastResults, final float foundLoci) {
     this.assemblyId = assemblyId;
 
     this.genotype = genotype;
@@ -46,7 +47,7 @@ public class GenotyphiResult extends AbstractJsonnable{
     return this.data;
   }
 
-  public Collection<GenotyphiMutation> getGenotyphiMutations() {
+  public Map<String, Collection<GenotyphiMutation>> getGenotyphiMutations() {
 
     return this.genotyphiMutations;
   }

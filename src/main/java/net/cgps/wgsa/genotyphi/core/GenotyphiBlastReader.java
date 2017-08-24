@@ -3,6 +3,7 @@ package net.cgps.wgsa.genotyphi.core;
 import net.cgps.wgsa.genotyphi.GenotyphiResult;
 import net.cgps.wgsa.genotyphi.lib.Mutation;
 import net.cgps.wgsa.genotyphi.lib.MutationSearchResult;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,28 +23,10 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
   private final Logger logger = LoggerFactory.getLogger(GenotyphiBlastReader.class);
   private final Map<String, GenotyphiGene> genotyphiSchema;
   private final Comparator<MutationSearchResult> BLAST_SORTER = Comparator.comparingDouble(a -> a.getBlastSearchStatistics().getPercentIdentity());
-  private final ResolveGenotyphi resolveGenotyphi;
 
-  public GenotyphiBlastReader(final GenotyphiSchema genotyphiSchema, final ResolveGenotyphi resolveGenotyphi) {
+  public GenotyphiBlastReader(final GenotyphiSchema genotyphiSchema) {
 
     this.genotyphiSchema = genotyphiSchema.asEntries().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-    this.resolveGenotyphi = resolveGenotyphi;
-  }
-
-  static class Counter {
-
-    int count;
-
-    public void increment() {
-
-      this.count++;
-    }
-
-    public int currentCount() {
-
-      return this.count;
-    }
   }
 
   @Override
@@ -69,10 +52,11 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
                   final Collection<GenotyphiMutation> variants = this.genotyphiSchema.get(result.getBlastSearchStatistics().getLibrarySequenceId()).getVariants();
 
                   // Count the number of found variants.
-                  final Collection<GenotyphiMutation> foundVariants = variants.stream().filter(variant -> result.getBlastSearchStatistics().getLibrarySequenceStart() < variant.getLocation() && variant.getLocation() < result.getBlastSearchStatistics().getLibrarySequenceStop()).map(variant -> {
-                    counter.increment();
-                    return variant;
-                  }).collect(Collectors.toList());
+                  final Collection<GenotyphiMutation> foundVariants = variants
+                      .stream()
+                      .filter(variant ->
+                          (result.getBlastSearchStatistics().getLibrarySequenceStart() < variant.getLocation()) && (variant.getLocation() < result.getBlastSearchStatistics().getLibrarySequenceStop()))
+                      .peek(variant -> counter.increment()).collect(Collectors.toList());
 
                   // Keep where >0 variants found.
                   return (!foundVariants.isEmpty());
@@ -83,27 +67,31 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
 
     // Extract the typing SNP matches
     // For each match check if the genotyphi variants are present, and gather those that are
-    final Collection<GenotyphiMutation> foundVariants = results
+    final Map<String, Collection<GenotyphiMutation>> foundVariants = results
         .stream()
         .filter(result -> !result.getMutations().isEmpty())
-        .flatMap(result -> {
+        .map(result -> {
 
           final GenotyphiGene gene = this.genotyphiSchema.get(result.getBlastSearchStatistics().getLibrarySequenceId());
 
-          return gene.getVariants()
+          return new ImmutablePair<>(gene.getSequenceId(), gene.getVariants()
               .stream()
               .filter(variant -> result.getMutations()
                   .stream()
                   .filter(mutation -> Mutation.MutationType.S == mutation.getMutationType())
                   .filter(mutation -> mutation.getReferenceLocation() == variant.getLocation())
-                  .anyMatch(mutation -> mutation.getMutationSequence().equals(variant.getVariant())));
+                  .anyMatch(mutation -> mutation.getMutationSequence().equals(variant.getVariant())))
+              .collect(Collectors.toList()));
         })
-        .collect(Collectors.toList());
+        .filter(gene -> !gene.getRight().isEmpty())
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-    this.logger.debug("{} genotyphi markers found", foundVariants.size());
-    this.logger.debug("{}", foundVariants.stream().map(genotyphiMutation -> genotyphiMutation.toJson()).collect(Collectors.joining("\n")));
+    this.logger.debug("{} genotyphi markers found", foundVariants.values().stream().mapToInt(Collection::size).sum());
 
-    final Set<GenotyphiSchema.GenotyphiGroup> collectedGroups = foundVariants.parallelStream()
+    final Set<GenotyphiSchema.GenotyphiGroup> collectedGroups = foundVariants.
+        values()
+        .stream()
+        .flatMap(Collection::stream)
         .peek(variant -> this.logger.debug("Variant={}", variant.toString()))
         .map(GenotyphiMutation::getGenotyphiGroup)
         .peek(group -> this.logger.debug("Group: {}", group.toString()))
@@ -111,18 +99,38 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
 
     final GenotyphiResult.AggregatedAssignments potentialGroups = FixNesting.buildDefault().apply(collectedGroups);
 
-    return new GenotyphiResultData(this.resolveGenotyphi.apply(potentialGroups, foundVariants), potentialGroups, foundVariants, results, counter.currentCount());
+    return new GenotyphiResultData(
+        new ResolveGenotyphi().apply(potentialGroups),
+        potentialGroups,
+        foundVariants,
+        results,
+        counter.currentCount());
+  }
+
+  static class Counter {
+
+    int count;
+
+    public void increment() {
+
+      this.count++;
+    }
+
+    public int currentCount() {
+
+      return this.count;
+    }
   }
 
   public static class GenotyphiResultData {
 
     private final String type;
     private final GenotyphiResult.AggregatedAssignments aggregatedAssignments;
-    private final Collection<GenotyphiMutation> genotyphiMutations;
+    private final Map<String, Collection<GenotyphiMutation>> genotyphiMutations;
     private final Collection<MutationSearchResult> blastResults;
     private final float foundLoci;
 
-    public GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<GenotyphiMutation> genotyphiMutations, final Collection<MutationSearchResult> results, final float foundLoci) {
+    public GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Map<String, Collection<GenotyphiMutation>> genotyphiMutations, final Collection<MutationSearchResult> results, final float foundLoci) {
 
       this.type = type;
       this.aggregatedAssignments = aggregatedAssignments;
@@ -141,7 +149,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
       return this.type;
     }
 
-    public Collection<GenotyphiMutation> getGenotyphiMutations() {
+    public Map<String, Collection<GenotyphiMutation>> getGenotyphiMutations() {
 
       return this.genotyphiMutations;
     }

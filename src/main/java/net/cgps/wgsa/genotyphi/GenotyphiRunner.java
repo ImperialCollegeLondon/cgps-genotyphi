@@ -2,7 +2,6 @@ package net.cgps.wgsa.genotyphi;
 
 import net.cgps.wgsa.genotyphi.core.GenotyphiBlastReader;
 import net.cgps.wgsa.genotyphi.core.GenotyphiSchema;
-import net.cgps.wgsa.genotyphi.core.ResolveGenotyphi;
 import net.cgps.wgsa.genotyphi.lib.BlastRunner;
 import net.cgps.wgsa.genotyphi.lib.MutationReader;
 
@@ -36,7 +35,7 @@ public class GenotyphiRunner implements Function<Path, GenotyphiResult> {
         "-num_alignments", "200",
     };
 
-    final GenotyphiBlastReader.GenotyphiResultData resultData = new GenotyphiBlastReader(this.schema, new ResolveGenotyphi()).apply(new BlastRunner<>(new MutationReader()).apply(command));
+    final GenotyphiBlastReader.GenotyphiResultData resultData = new GenotyphiBlastReader(this.schema).apply(new BlastRunner<>(new MutationReader()).apply(command));
 
     return new GenotyphiResult(assemblyId, resultData.getType(), resultData.getGenotyphiMutations(), resultData.getAggregatedAssignments(), resultData.getBlastResults(), resultData.getFoundLoci());
   }

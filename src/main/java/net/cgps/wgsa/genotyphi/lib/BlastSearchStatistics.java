@@ -2,7 +2,7 @@ package net.cgps.wgsa.genotyphi.lib;
 
 import java.util.function.Function;
 
-public class BlastSearchStatistics extends AbstractJsonnable {
+public class BlastSearchStatistics extends Jsonnable {
 
   // Don't use a char[] here as the internal elements aren't immutable.
   private final String librarySequenceId;

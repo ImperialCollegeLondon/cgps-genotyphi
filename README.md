@@ -101,44 +101,73 @@ NB not pretty printed, one record per line
 * Get options and help: `java -jar genotyphi.jar`
 * e.g. a single assembly `java -jar genotyphi.jar -i salty_assembly.fa`
 
-### Output Format
+## Output Format
 
-Currently only a JSON output is supported.
+1. [Text](#text-format)
+1. [JSON](#json-format)
+1. [Pretty JSON](#pretty-json-format)
+1. [Simple JSON](#simple-json-format)
 
-#### JSON
+### Text Format
 
-A complete example of the JSON format can be found in [here](/examples/output.jsn)
+The text format contains three lines:
+ 
+1. The assembly ID
+1. The genotype
+1. The determining mutations: {geneName}_{location}{variant}_({associated genotyp}) 
+
+```
+Name: 007898
+Genotype: 4.3.1
+Mutations: STY2513_1047T_(4.3.1), STY2867_515C_(2), STY3196_989A_(3)
+```
+
+### JSON Format
+
+A complete example of the JSON format can be found in [here](/examples/output.jsn). The example below is "pretty" formatted. By default it is printed on a single line with no spaces.
+
 ```
 {
   "assemblyId" : "my_assembly",
-  "genotype" : "3.3",
+  "genotype" : "4.3.1",
   "foundLoci" : 68.0,
   "aggregatedAssignments" : {
     "primaryGroups" : [ {
       "depth" : "PRIMARY",
       "code" : [ "3" ]
     } ],
-    "cladeGroups" : [ {
-      "depth" : "CLADE",
-      "code" : [ "3", "3" ]
-    } ],
-    "subcladeGroups" : [ ]
+    "cladeGroups" : [ ],
+    "subcladeGroups" : [ {
+      "depth" : "SUBCLADE",
+      "code" : [ "4", "3", "1" ]
+    } ]
   },
-  "genotyphiMutations" : [ {
-    "variant" : "T",
-    "genotyphiGroup" : {
-      "depth" : "CLADE",
-      "code" : [ "3", "3" ]
-    },
-    "location" : 177
-  }, {
-    "variant" : "A",
-    "genotyphiGroup" : {
-      "depth" : "PRIMARY",
-      "code" : [ "3" ]
-    },
-    "location" : 989
-  } ],
+  "genotyphiMutations" : {
+    "STY2513" : [ {
+      "variant" : "T",
+      "genotyphiGroup" : {
+        "depth" : "SUBCLADE",
+        "code" : [ "4", "3", "1" ]
+      },
+      "location" : 1047
+    } ],
+    "STY2867" : [ {
+      "variant" : "C",
+      "genotyphiGroup" : {
+        "depth" : "PRIMARY",
+        "code" : [ "2" ]
+      },
+      "location" : 515
+    } ],
+    "STY3196" : [ {
+      "variant" : "A",
+      "genotyphiGroup" : {
+        "depth" : "PRIMARY",
+        "code" : [ "3" ]
+      },
+      "location" : 989
+    } ]
+  },
   "blastResults" : [ {
     "blastSearchStatistics" : {
       "librarySequenceId" : "STY3940",
@@ -160,7 +189,16 @@ A complete example of the JSON format can be found in [here](/examples/output.js
   ]
 }
 ```
-#### Naming Docker Builds
+
+### Pretty JSON Format
+
+This formats the JSON nicely as in the example given above.
+
+### Simple JSON Format
+
+The same as the above JSON format, but without the BLAST results or aggregation result details.
+
+## Naming Docker Builds
 
 Container tags are automatically generated during the build phase by Maven using [jgitver](https://github.com/jgitver/jgitver).
 
