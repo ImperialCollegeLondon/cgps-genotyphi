@@ -103,6 +103,7 @@ NB not pretty printed, one record per line
 
 ## Output Format
 
+The output format can be selected using the `-f`/`-format` option. It defaults to `Text`.
 1. [Text](#text-format)
 1. [JSON](#json-format)
 1. [Pretty JSON](#pretty-json-format)
