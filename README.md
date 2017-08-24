@@ -104,6 +104,7 @@ NB not pretty printed, one record per line
 ## Output Format
 
 1. [Text](#text-format)
+1. [CSV](#csv-format)
 1. [JSON](#json-format)
 1. [Pretty JSON](#pretty-json-format)
 1. [Simple JSON](#simple-json-format)
@@ -114,12 +115,25 @@ The text format contains three lines:
  
 1. The assembly ID
 1. The genotype
-1. The determining mutations: {geneName}_{location}{variant}_({associated genotyp}) 
+1. The determining mutations: {geneName}_{location}{variant}_({associated genotype}) 
 
 ```
 Name: 007898
 Genotype: 4.3.1
 Mutations: STY2513_1047T_(4.3.1), STY2867_515C_(2), STY3196_989A_(3)
+```
+
+### CSV Format
+
+The CSV format contains the same fields as the [text format](#text-format), but in columns instead. In default mode one file per assembly is written. If you want a single CSV file for all assemblies use the `-o` option and write the STDOUT to file, e.g:
+
+`docker run --rm -v $PWD:/data registry.gitlab.com/cgps/cgps-genotyphi -i . -o -f csv > genotyphi.csv`
+
+```
+10071_8#7.contigs_velvet,3.5.4,"STY0176_969T_(3.5.4); STY2867_515C_(2); STY3196_989A_(3); STY4063_411T_(3.5)"
+13566_1#53.contigs_velvet,3.1.1,"STY3203_9C_(3.1); STY2863_154T_(3.1.1); STY2867_515C_(2); STY3196_989A_(3)"
+9870_8#7.contigs_velvet,4.3.1,"STY2513_1047T_(4.3.1); STY2867_515C_(2); STY3196_989A_(3)"
+ERR1079262_paired.contigs_spades,3.2.2,"STY4741_444T_(3.2.2); STY3196_989A_(3)"
 ```
 
 ### JSON Format

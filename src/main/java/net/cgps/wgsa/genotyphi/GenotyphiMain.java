@@ -3,6 +3,9 @@ package net.cgps.wgsa.genotyphi;
 import ch.qos.logback.classic.Level;
 import net.cgps.wgsa.genotyphi.core.GenotyphiSchema;
 import net.cgps.wgsa.genotyphi.core.SchemaReader;
+import net.cgps.wgsa.genotyphi.formats.CsvFormatter;
+import net.cgps.wgsa.genotyphi.formats.Formatter;
+import net.cgps.wgsa.genotyphi.formats.TextFormatter;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -122,29 +124,61 @@ public class GenotyphiMain {
 
     final GenotyphiRunner runner = new GenotyphiRunner(schema, databasePath);
 
-    final Consumer<GenotyphiResult> writer = this.getConsumer(format, toStdout, workingDirectory);
-
     this.logger.info("Writing format {}", format.name().toLowerCase());
 
     fastas
-        .stream()
+        .parallelStream()
+        .peek(fasta -> this.logger.info("Typing {}", fasta.getFileName().toString()))
         .map(runner)
-        .forEach(writer);
+        .forEach(this.getConsumer(format, toStdout, workingDirectory));
   }
 
   private Consumer<GenotyphiResult> getConsumer(final Format format, final boolean isToStdout, final Path workingDirectory) {
 
-    final Function<GenotyphiResult, String> formatter;
+    final Formatter formatter;
 
     switch (format) {
       case JSON:
-        formatter = genotyphiResult -> genotyphiResult.toJson();
+        formatter = new Formatter() {
+          @Override
+          public String getFileExtension() {
+            return ".jsn";
+          }
+
+          @Override
+          public String apply(final GenotyphiResult genotyphiResult) {
+            return genotyphiResult.toJson();
+          }
+        };
         break;
       case PRETTY_JSON:
-        formatter = genotyphiResult -> genotyphiResult.toPrettyJson();
+        formatter = new Formatter() {
+          @Override
+          public String getFileExtension() {
+            return ".jsn";
+          }
+
+          @Override
+          public String apply(final GenotyphiResult genotyphiResult) {
+            return genotyphiResult.toPrettyJson();
+          }
+        };
         break;
       case SIMPLE_JSON:
-        formatter = genotyphiResult -> GenotyphiResultSimple.fromFullResult(genotyphiResult).toPrettyJson();
+        formatter = new Formatter() {
+          @Override
+          public String getFileExtension() {
+            return ".jsn";
+          }
+
+          @Override
+          public String apply(final GenotyphiResult genotyphiResult) {
+            return GenotyphiResultSimple.fromFullResult(genotyphiResult).toPrettyJson();
+          }
+        };
+        break;
+      case CSV:
+        formatter = new CsvFormatter();
         break;
       case TEXT:
       default:
@@ -159,7 +193,7 @@ public class GenotyphiMain {
   }
 
   public enum Format {
-    TEXT, JSON, PRETTY_JSON, SIMPLE_JSON;
+    TEXT, JSON, PRETTY_JSON, SIMPLE_JSON, CSV;
 
     public static String getFormats() {
       return Stream.of(Format.values()).map(Format::name).map(String::toLowerCase).collect(Collectors.joining(", "));

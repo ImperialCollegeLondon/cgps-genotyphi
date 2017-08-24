@@ -1,9 +1,11 @@
-package net.cgps.wgsa.genotyphi;
+package net.cgps.wgsa.genotyphi.formats;
 
-import java.util.function.Function;
+import net.cgps.wgsa.genotyphi.GenotyphiResult;
+
 import java.util.stream.Collectors;
 
-public class TextFormatter implements Function<GenotyphiResult, String> {
+public class TextFormatter implements Formatter {
+
   @Override
   public String apply(final GenotyphiResult genotyphiResult) {
     final StringBuilder report = new StringBuilder(200)
@@ -25,5 +27,10 @@ public class TextFormatter implements Function<GenotyphiResult, String> {
             .map(mutation -> gene.getKey() + "_" + mutation.getLocation() + mutation.getVariant() + "_(" + mutation.getGenotyphiGroup().toCode() + ")")
         )
         .collect(Collectors.joining(", "))).toString();
+  }
+
+  @Override
+  public String getFileExtension() {
+    return ".txt";
   }
 }
