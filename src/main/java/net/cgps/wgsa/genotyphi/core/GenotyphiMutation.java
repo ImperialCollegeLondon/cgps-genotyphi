@@ -1,8 +1,8 @@
 package net.cgps.wgsa.genotyphi.core;
 
-import net.cgps.wgsa.genotyphi.lib.AbstractJsonnable;
+import net.cgps.wgsa.genotyphi.lib.Jsonnable;
 
-public class GenotyphiMutation extends AbstractJsonnable {
+public class GenotyphiMutation extends Jsonnable {
 
   private final String variant;
   private final GenotyphiSchema.GenotyphiGroup genotyphiGroup;
@@ -15,7 +15,6 @@ public class GenotyphiMutation extends AbstractJsonnable {
   }
 
   public GenotyphiMutation(final String variant, final GenotyphiSchema.GenotyphiGroup genotyphiGroup, final int location) {
-    super();
     this.variant = variant;
     this.genotyphiGroup = genotyphiGroup;
     this.location = location;

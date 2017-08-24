@@ -2,14 +2,13 @@ package net.cgps.wgsa.genotyphi.core;
 
 import net.cgps.wgsa.genotyphi.GenotyphiResult;
 
-import java.util.Collection;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
-public class ResolveGenotyphi implements BiFunction<GenotyphiResult.AggregatedAssignments, Collection<GenotyphiMutation>, String> {
+public class ResolveGenotyphi implements Function<GenotyphiResult.AggregatedAssignments, String> {
 
 
   @Override
-  public String apply(final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<GenotyphiMutation> genotyphiMutations) {
+  public String apply(final GenotyphiResult.AggregatedAssignments aggregatedAssignments) {
 
     final String bestResult;
 

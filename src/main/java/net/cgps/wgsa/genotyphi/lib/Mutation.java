@@ -1,7 +1,7 @@
 package net.cgps.wgsa.genotyphi.lib;
 
 
-public class Mutation extends AbstractJsonnable {
+public class Mutation extends Jsonnable {
 
   private final String referenceId;
   private final String originalSequence;

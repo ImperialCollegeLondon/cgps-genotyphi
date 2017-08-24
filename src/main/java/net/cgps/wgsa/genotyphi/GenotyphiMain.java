@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class GenotyphiMain {
 
@@ -91,20 +91,6 @@ public class GenotyphiMain {
     }
   }
 
-  private void run(final Collection<Path> fastas, final Path workingDirectory, final boolean toStdout, final Path databasePath) {
-
-    final GenotyphiSchema schema = new SchemaReader().apply(databasePath);
-
-    final GenotyphiRunner runner = new GenotyphiRunner(schema, databasePath);
-
-    final Consumer<GenotyphiResult> writer = this.getConsumer(toStdout, workingDirectory);
-
-    fastas
-        .stream()
-        .map(runner)
-        .forEach(writer);
-  }
-
   private static Options myOptions() {
 
     final Option assemblyListOption = Option.builder("i").longOpt("input").hasArg().argName("Assembly file(s)").desc("If a directory is provided then all FASTAs (.fna, .fa, .fasta) are searched.").build();
@@ -117,31 +103,56 @@ public class GenotyphiMain {
 
     final Option outputOption = Option.builder("o").longOpt("outfile").argName("Create output file").desc("Use this flag if you want the result written to STDOUT rather than file.").build();
 
+    final Option formatOption = Option.builder("f").longOpt("format").argName("Select the output format from 'text' (default),'json'").build();
+
     final Options options = new Options();
     options.addOption(assemblyListOption)
         .addOption(resourceDirectoryOption)
         .addOption(outputOption)
         .addOption(buildModeOption)
+        .addOption(formatOption)
         .addOption(logLevel);
 
     return options;
   }
 
-  private Consumer<GenotyphiResult> getConsumer(final boolean isToStdout, final Path workingDirectory) {
+  private void run(final Collection<Path> fastas, final Path workingDirectory, final boolean toStdout, final Path databasePath, final Format format) {
+
+    final GenotyphiSchema schema = new SchemaReader().apply(databasePath);
+
+    final GenotyphiRunner runner = new GenotyphiRunner(schema, databasePath);
+
+    final Consumer<GenotyphiResult> writer = this.getConsumer(format, toStdout, workingDirectory);
+
+    fastas
+        .stream()
+        .map(runner)
+        .forEach(writer);
+  }
+
+  private Consumer<GenotyphiResult> getConsumer(final Format format, final boolean isToStdout, final Path workingDirectory) {
+
+    final Function<GenotyphiResult, String> formatter;
+
+    switch (format) {
+      case JSON:
+        format = genotyphiResult -> genotyphiResult.toJson();
+      case JSON_PRETTY:
+        return genotyphiResult -> genotyphiResult.toPrettyJson();
+      case TEXT:
+        return genotyphiResult -> {
+
+        };
+      case JSON_SIMPLE:
+        return genotyphiResult -> GenotyphiResultSimple.fromFullResult(genotyphiResult).toPrettyJson();
+    }
 
     if (isToStdout) {
-      return genotyphiResult -> {
-        try (final BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out))) {
-          bufferedWriter.append(genotyphiResult.toJson());
-          bufferedWriter.newLine();
-        } catch (final IOException e) {
-          throw new RuntimeException(e);
-        }
-      };
+      return new StdoutWriter(formatter);
     } else {
       return resultString -> {
 
-        final Path outFile = Paths.get(workingDirectory.toString(), resultString.getAssemblyId() + "_paarsnp.jsn");
+        final Path outFile = Paths.get(workingDirectory.toString(), resultString.getAssemblyId() + "_genotyphi.jsn");
 
         this.logger.debug("Writing {}", outFile.toAbsolutePath().toString());
 
@@ -153,6 +164,10 @@ public class GenotyphiMain {
         }
       };
     }
+  }
+
+  public enum Format {
+    JSON, JSON_PRETTY, TEXT, JSON_SIMPLE
   }
 }
 

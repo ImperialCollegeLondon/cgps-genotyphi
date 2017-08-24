@@ -99,30 +99,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>-->
-            <!--<artifactId>maven-resources-plugin</artifactId>-->
-            <!--<version>${genotyphi.maven-resources.version}</version>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>copy-jar</id>-->
-            <!--<phase>prepare-package</phase>-->
-            <!--<goals>-->
-            <!--<goal>copy-resources</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-            <!--<outputDirectory>build/</outputDirectory>-->
-            <!--<resources>-->
-            <!--<resource>-->
-            <!--<directory>target</directory>-->
-            <!--<includes>-->
-            <!--<include>genotyphi.jar</include>-->
-            <!--</includes>-->
-            <!--</resource>-->
-            <!--</resources>-->
-            <!--</configuration>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>${genotyphi.maven-clean.version}</version>

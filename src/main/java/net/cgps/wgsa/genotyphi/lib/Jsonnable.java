@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 /**
- * The base class for Jsonnable objects. Provides JSON serialisation/deserialisation ob User: cyeats Date: 10/23/13
+ * The base class for Jsonnable objects. Provides JSON_PRETTY serialisation/deserialisation ob User: cyeats Date: 10/23/13
  * Time: 1:53 PM
  */
-public abstract class AbstractJsonnable {
+public abstract class Jsonnable {
 
   @Override
   public String toString() {
@@ -28,37 +28,37 @@ public abstract class AbstractJsonnable {
 
     final ObjectMapper mapper = new ObjectMapper();
 
-    // Create a StringWriter to write the JSON string to
+    // Create a StringWriter to write the JSON_PRETTY string to
     final StringWriter writer = new StringWriter();
 
     try {
       mapper.writerWithDefaultPrettyPrinter().writeValue(writer, object);
     } catch (final IOException e) {
       // I don't think this can happen since there is no IO...
-      LoggerFactory.getLogger(object.getClass()).error("IOException thrown when writing JSON string.", e);
+      LoggerFactory.getLogger(object.getClass()).error("IOException thrown when writing JSON_PRETTY string.", e);
     }
 
     return writer.toString();
   }
 
   /**
-   * Method is specific to classes that are expected to be serialised as JSON
+   * Method is specific to classes that are expected to be serialised as JSON_PRETTY
    *
    * @param jsonnableObject - an object that conforms to the Jackson requirements for serialisation.
-   * @return A pretty representation of the JSON string.
+   * @return A pretty representation of the JSON_PRETTY string.
    */
-  public static String toPrettyJson(final AbstractJsonnable jsonnableObject) {
+  public static String toPrettyJson(final Jsonnable jsonnableObject) {
 
     final ObjectMapper mapper = new ObjectMapper();
 
-    // Create a StringWriter to write the JSON string to
+    // Create a StringWriter to write the JSON_PRETTY string to
     final StringWriter writer = new StringWriter();
 
     try {
       mapper.writerWithDefaultPrettyPrinter().writeValue(writer, jsonnableObject);
     } catch (final IOException e) {
       // I don't think this can happen since there is no IO...
-      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing JSON string.", e);
+      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing JSON_PRETTY string.", e);
     }
 
     return writer.toString();
@@ -75,7 +75,7 @@ public abstract class AbstractJsonnable {
     return toPrettyJson(this);
   }
 
-  public static String toJson(final AbstractJsonnable jsonnableObject) {
+  public static String toJson(final Jsonnable jsonnableObject) {
 
     final StringWriter writer = new StringWriter();
 
@@ -83,21 +83,21 @@ public abstract class AbstractJsonnable {
       new ObjectMapper().writer().writeValue(writer, jsonnableObject);
     } catch (final IOException e) {
       // I don't think this can happen since there is no IO...
-      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing JSON string.", e);
+      LoggerFactory.getLogger(jsonnableObject.getClass()).error("IOException thrown when writing JSON_PRETTY string.", e);
     }
     return writer.toString();
 
   }
 
-  public static <T extends AbstractJsonnable> T fromJson(final File snparDb, final Class<T> messageClass) {
+  public static <T extends Jsonnable> T fromJson(final File snparDb, final Class<T> messageClass) {
 
     try {
 
       return new ObjectMapper().readValue(snparDb, messageClass);
 
     } catch (final IOException | NullPointerException e) {
-      LoggerFactory.getLogger(AbstractJsonnable.class).error("Json mapping exception for file {} to type {}", snparDb.getPath(), messageClass);
-      LoggerFactory.getLogger(AbstractJsonnable.class).error("Message: ", e);
+      LoggerFactory.getLogger(Jsonnable.class).error("Json mapping exception for file {} to type {}", snparDb.getPath(), messageClass);
+      LoggerFactory.getLogger(Jsonnable.class).error("Message: ", e);
 
       throw new RuntimeException(e);
     }
