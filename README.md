@@ -1,7 +1,7 @@
 # cgps-genotyphi
 CGPS implementation of [Genotyphi by Kat Holt _et al_](https://github.com/katholt/genotyphi) for assembled genomes. Genotyphi is a typing scheme for _Salmonella_ Typhi that uses a set a curated mutations to assign strains to a particular labelled clade.
 
-For a full description of Genotyphi please visit the above link, and read the (original paper)[https://www.nature.com/articles/ncomms12827/]. 
+For a full description of Genotyphi please visit the above link, and read the [original paper](https://www.nature.com/articles/ncomms12827/).
 
 [Getting Started](#getting-started)
 
