@@ -33,6 +33,7 @@ public class GenotyphiRunner implements Function<Path, GenotyphiResult> {
         "-perc_identity", "80",
         "-evalue", "1e-60",
         "-num_alignments", "200",
+        "-word_size", "20"
     };
 
     final GenotyphiBlastReader.GenotyphiResultData resultData = new GenotyphiBlastReader(this.schema).apply(new BlastRunner<>(new MutationReader()).apply(command));
