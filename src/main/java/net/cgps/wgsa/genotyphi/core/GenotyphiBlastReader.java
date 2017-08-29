@@ -3,14 +3,10 @@ package net.cgps.wgsa.genotyphi.core;
 import net.cgps.wgsa.genotyphi.GenotyphiResult;
 import net.cgps.wgsa.genotyphi.lib.Mutation;
 import net.cgps.wgsa.genotyphi.lib.MutationSearchResult;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -67,14 +63,14 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
 
     // Extract the typing SNP matches
     // For each match check if the genotyphi variants are present, and gather those that are
-    final Map<String, Collection<GenotyphiMutation>> foundVariants = results
+    final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> foundVariants = results
         .stream()
         .filter(result -> !result.getMutations().isEmpty())
         .map(result -> {
 
           final GenotyphiGene gene = this.genotyphiSchema.get(result.getBlastSearchStatistics().getLibrarySequenceId());
 
-          return new ImmutablePair<>(gene.getSequenceId(), gene.getVariants()
+          return new AbstractMap.SimpleImmutableEntry<String, Collection<GenotyphiMutation>>(gene.getSequenceId(), gene.getVariants()
               .stream()
               .filter(variant -> result.getMutations()
                   .stream()
@@ -83,14 +79,15 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
                   .anyMatch(mutation -> mutation.getMutationSequence().equals(variant.getVariant())))
               .collect(Collectors.toList()));
         })
-        .filter(gene -> !gene.getRight().isEmpty())
-        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        .filter(gene -> !gene.getValue().isEmpty())
+        .distinct()
+        .collect(Collectors.toList());
 
-    this.logger.debug("{} genotyphi markers found", foundVariants.values().stream().mapToInt(Collection::size).sum());
+    this.logger.debug("{} genotyphi markers found", foundVariants.stream().map(Map.Entry::getValue).mapToInt(Collection::size).sum());
 
-    final Set<GenotyphiSchema.GenotyphiGroup> collectedGroups = foundVariants.
-        values()
+    final Set<GenotyphiSchema.GenotyphiGroup> collectedGroups = foundVariants
         .stream()
+        .map(Map.Entry::getValue)
         .flatMap(Collection::stream)
         .peek(variant -> this.logger.debug("Variant={}", variant.toString()))
         .map(GenotyphiMutation::getGenotyphiGroup)
@@ -126,11 +123,11 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
 
     private final String type;
     private final GenotyphiResult.AggregatedAssignments aggregatedAssignments;
-    private final Map<String, Collection<GenotyphiMutation>> genotyphiMutations;
+    private final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations;
     private final Collection<MutationSearchResult> blastResults;
     private final float foundLoci;
 
-    public GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Map<String, Collection<GenotyphiMutation>> genotyphiMutations, final Collection<MutationSearchResult> results, final float foundLoci) {
+    public GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final Collection<MutationSearchResult> results, final float foundLoci) {
 
       this.type = type;
       this.aggregatedAssignments = aggregatedAssignments;
@@ -149,7 +146,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
       return this.type;
     }
 
-    public Map<String, Collection<GenotyphiMutation>> getGenotyphiMutations() {
+    public Collection<Map.Entry<String, Collection<GenotyphiMutation>>> getGenotyphiMutations() {
 
       return this.genotyphiMutations;
     }

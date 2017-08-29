@@ -31,9 +31,11 @@ public class GenotyphiRunner implements Function<Path, GenotyphiResult> {
         "-query", assemblyFile.toAbsolutePath().toString(),
         "-db",this.resourceDirectory.toString() + "/genotyphi",
         "-perc_identity", "80",
-        "-evalue", "1e-60",
+        "-evalue", "1e-40",
         "-num_alignments", "200",
-        "-word_size", "20"
+        "-word_size", "20",
+        "-best_hit_score_edge", "0.01",
+        "-best_hit_overhang", "0.4"
     };
 
     final GenotyphiBlastReader.GenotyphiResultData resultData = new GenotyphiBlastReader(this.schema).apply(new BlastRunner<>(new MutationReader()).apply(command));

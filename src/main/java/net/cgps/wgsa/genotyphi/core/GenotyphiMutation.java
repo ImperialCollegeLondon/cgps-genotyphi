@@ -34,4 +34,24 @@ public class GenotyphiMutation extends Jsonnable {
 
     return this.genotyphiGroup;
   }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    final GenotyphiMutation that = (GenotyphiMutation) o;
+
+    if (location != that.location) return false;
+    if (variant != null ? !variant.equals(that.variant) : that.variant != null) return false;
+    return genotyphiGroup != null ? genotyphiGroup.equals(that.genotyphiGroup) : that.genotyphiGroup == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = variant != null ? variant.hashCode() : 0;
+    result = 31 * result + (genotyphiGroup != null ? genotyphiGroup.hashCode() : 0);
+    result = 31 * result + location;
+    return result;
+  }
 }

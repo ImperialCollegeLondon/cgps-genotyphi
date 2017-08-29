@@ -18,7 +18,6 @@ public class CsvFormatter implements Formatter {
 
     return report.append(genotyphiResult
         .getGenotyphiMutations()
-        .entrySet()
         .stream()
         .flatMap(gene -> gene
             .getValue()
