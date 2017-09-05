@@ -1,7 +1,7 @@
 # cgps-genotyphi
-CGPS implementation of [Genotyphi by Kat Holt _et al_](https://github.com/katholt/genotyphi) for assembled genomes. Genotyphi is a typing scheme for _Salmonella_ Typhi that uses a set of curated mutations to assign strains to a particular labelled clade.
+CGPS implementation of [Genotyphi by Kat Holt _et al_](https://github.com/katholt/genotyphi) for assembled genomes. Genotyphi is the implementation of the genotyping framework for _Salmonella_ Typhi by [Wong et al](https://www.nature.com/articles/ncomms12827/), which uses a curated set of mutations to assign strains to a particular labelled clade or subclade.
 
-For a full description of Genotyphi please visit the above link, and read the [original paper](https://www.nature.com/articles/ncomms12827/).
+For a full description of Genotyphi and the schema please visit the above links.
 
 [Getting Started](#getting-started)
 
@@ -59,11 +59,11 @@ mvn -Dmaven.test.skip=true install
 # (or leave out -Dmaven.test.skip=true if blastn is available)
 ```
 
-This will configure the BLAST databases and resources that PAARSNP needs.
+This will configure the BLAST databases and resources that Genotyphi needs.
 
 At this point you can use [Docker](#running-with-docker) or run it directly from the [terminal](#running-directly).
 
-To create the Paarsnp runner container, run:
+To create the Genotyphi container, run:
 
 1. cd build
 1. docker build -t genotyphi -f DockerFile .
@@ -224,3 +224,8 @@ docker run -it --rm --name genotyphi -v /var/run/docker.sock:/var/run/docker.soc
 ```
 
 The Docker repository can be changed from the CGPS default by editing the `<genotyphi.docker-repository>` property in the top level `pom.xml`.
+
+
+# Acknowledgments
+
+This software was written developed by the [Centre for Genomic Pathogen Surveillance (CGPS)](http://www.pathogensurveillance.net/) and funded by the Wellcome Trust.
