@@ -106,14 +106,14 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
 
   static class Counter {
 
-    int count;
+    byte count = 0;
 
-    public void increment() {
+    void increment() {
 
       this.count++;
     }
 
-    public int currentCount() {
+    byte currentCount() {
 
       return this.count;
     }
@@ -125,9 +125,9 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
     private final GenotyphiResult.AggregatedAssignments aggregatedAssignments;
     private final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations;
     private final Collection<MutationSearchResult> blastResults;
-    private final float foundLoci;
+    private final byte foundLoci;
 
-    public GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final Collection<MutationSearchResult> results, final float foundLoci) {
+    GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final Collection<MutationSearchResult> results, final byte foundLoci) {
 
       this.type = type;
       this.aggregatedAssignments = aggregatedAssignments;
@@ -166,7 +166,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
       return this.blastResults;
     }
 
-    public float getFoundLoci() {
+    public byte getFoundLoci() {
 
       return this.foundLoci;
     }
