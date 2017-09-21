@@ -21,7 +21,7 @@
         <genotyphi.apache-commons-cli>1.3.1</genotyphi.apache-commons-cli>
         <genotyphi.apache-commons-csv>1.4</genotyphi.apache-commons-csv>
         <genotyphi.apache-commons-lang3>3.6</genotyphi.apache-commons-lang3>
-        <genotyphi.df-mvn-plugin.version>1.3.4</genotyphi.df-mvn-plugin.version>
+        <genotyphi.df-mvn-plugin.version>1.3.6</genotyphi.df-mvn-plugin.version>
         <genotyphi.jackson>2.9.0</genotyphi.jackson>
         <genotyphi.junit.version>4.12</genotyphi.junit.version>
         <genotyphi.logback-classic>1.2.3</genotyphi.logback-classic>
