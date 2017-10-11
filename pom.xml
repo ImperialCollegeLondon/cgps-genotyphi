@@ -25,7 +25,7 @@
         <genotyphi.jackson>2.9.0</genotyphi.jackson>
         <genotyphi.junit.version>4.12</genotyphi.junit.version>
         <genotyphi.logback-classic>1.2.3</genotyphi.logback-classic>
-        <genotyphi.docker-repository>registry.gitlab.com/cgps/cgps-genotyphi</genotyphi.docker-repository>
+        <genotyphi.docker-repository>cgps/genotyphi</genotyphi.docker-repository>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>

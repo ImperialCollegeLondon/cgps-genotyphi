@@ -1,5 +1,5 @@
 # cgps-genotyphi
-CGPS implementation of [Genotyphi by Kat Holt _et al_](https://github.com/katholt/genotyphi) for assembled genomes. Genotyphi is the implementation of the genotyping framework for _Salmonella_ Typhi by [Wong et al](https://www.nature.com/articles/ncomms12827/), which uses a curated set of mutations to assign strains to a particular labelled clade or subclade.
+CGPS implementation of [Genotyphi by Kat Holt _et al_](https://github.com/katholt/genotyphi) for assembled genomes. Genotyphi is the implementation of the genotyping framework for _Salmonella_ Typhi by [Wong _et al_](https://www.nature.com/articles/ncomms12827/), which uses a curated set of mutations to assign strains to a particular labelled clade or subclade.
 
 For a full description of Genotyphi and the schema please visit the above links.
 
@@ -13,7 +13,17 @@ For a full description of Genotyphi and the schema please visit the above links.
 
 ## Getting Started
 
-CGPS-Genotyphi can be run as a JAVA programme (Linux/MacOS) or using Docker (all platforms). We will provide a public Docker container soon.
+CGPS-Genotyphi can be run as a JAVA programme (Linux/MacOS) or using Docker (all platforms).
+
+The simplest way to install and run CGPS-Genotyphi is via Docker with the following command:
+
+```
+docker run --rm -v $PWD:/data cgps/genotyphi -i [my_typhi_assembly.fasta] -o
+```
+
+If the latest version is not installed, Docker will pull it down from the central DockerHub repository before running it. If you want to use a specific version of genotyphi add the 'version tag' to the command as `cgps/genotyphi:v1.0.1`.
+
+Otherwise to install the programme follow either the Docker-based or Maven-based build instructions below.
 
 ### Docker-based Build (recommended)
 
@@ -27,6 +37,7 @@ Requires:
 wget https://github.com/ImperialCollegeLondon/cgps-genotyphi/archive/master.zip
 unzip code-genotyphi-master.zip
 ```
+
 2. Installation
 ```
 cd genotyphi
