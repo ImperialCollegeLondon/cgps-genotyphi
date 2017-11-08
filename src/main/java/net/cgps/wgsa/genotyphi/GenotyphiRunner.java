@@ -40,6 +40,7 @@ public class GenotyphiRunner implements Function<Path, GenotyphiResult> {
 
     final GenotyphiBlastReader.GenotyphiResultData resultData = new GenotyphiBlastReader(this.schema).apply(new BlastRunner<>(new MutationReader()).apply(command));
 
+    // Convert the result output into the JSON-ready object.
     return new GenotyphiResult(assemblyId, resultData.getType(), resultData.getGenotyphiMutations(), resultData.getAggregatedAssignments(), resultData.getBlastResults(), resultData.getFoundLoci());
   }
 }
