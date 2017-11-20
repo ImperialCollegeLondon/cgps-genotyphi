@@ -11,9 +11,9 @@ public class GenotyphiResultSimple extends Jsonnable {
   private final String assemblyId;
   private final String genotype;
   private final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations;
-  private final byte foundLoci;
+  private final int foundLoci;
 
-  public GenotyphiResultSimple(final String assemblyId, final String genotype, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final byte foundLoci) {
+  public GenotyphiResultSimple(final String assemblyId, final String genotype, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final int foundLoci) {
     this.assemblyId = assemblyId;
     this.genotype = genotype;
     this.genotyphiMutations = genotyphiMutations;
@@ -36,7 +36,7 @@ public class GenotyphiResultSimple extends Jsonnable {
     return this.genotyphiMutations;
   }
 
-  public byte getFoundLoci() {
+  public int getFoundLoci() {
     return this.foundLoci;
   }
 }

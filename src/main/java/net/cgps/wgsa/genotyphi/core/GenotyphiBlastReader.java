@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -28,7 +29,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
   @Override
   public GenotyphiResultData apply(final Stream<MutationSearchResult> searchResults) {
 
-    final Counter counter = new Counter();
+    final AtomicInteger counter = new AtomicInteger(0);
 
     // filter to best match only.
     final Collection<MutationSearchResult> results = searchResults
@@ -51,8 +52,11 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
                   final Collection<GenotyphiMutation> foundVariants = variants
                       .stream()
                       .filter(variant ->
-                          (result.getBlastSearchStatistics().getLibrarySequenceStart() < variant.getLocation()) && (variant.getLocation() < result.getBlastSearchStatistics().getLibrarySequenceStop()))
-                      .peek(variant -> counter.increment()).collect(Collectors.toList());
+                          (result.getBlastSearchStatistics().getLibrarySequenceStart() < variant.getLocation())
+                              &&
+                              (variant.getLocation() < result.getBlastSearchStatistics().getLibrarySequenceStop()))
+                      .peek(variant -> counter.incrementAndGet())
+                      .collect(Collectors.toList());
 
                   // Keep where >0 variants found.
                   return (!foundVariants.isEmpty());
@@ -101,22 +105,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
         potentialGroups,
         foundVariants,
         results,
-        counter.currentCount());
-  }
-
-  static class Counter {
-
-    byte count = 0;
-
-    void increment() {
-
-      this.count++;
-    }
-
-    byte currentCount() {
-
-      return this.count;
-    }
+        counter.get());
   }
 
   public static class GenotyphiResultData {
@@ -125,9 +114,9 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
     private final GenotyphiResult.AggregatedAssignments aggregatedAssignments;
     private final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations;
     private final Collection<MutationSearchResult> blastResults;
-    private final byte foundLoci;
+    private final int foundLoci;
 
-    GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final Collection<MutationSearchResult> results, final byte foundLoci) {
+    GenotyphiResultData(final String type, final GenotyphiResult.AggregatedAssignments aggregatedAssignments, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final Collection<MutationSearchResult> results, final int foundLoci) {
 
       this.type = type;
       this.aggregatedAssignments = aggregatedAssignments;
@@ -166,7 +155,7 @@ public class GenotyphiBlastReader implements Function<Stream<MutationSearchResul
       return this.blastResults;
     }
 
-    public byte getFoundLoci() {
+    public int getFoundLoci() {
 
       return this.foundLoci;
     }

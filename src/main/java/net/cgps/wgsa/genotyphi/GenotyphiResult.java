@@ -18,18 +18,18 @@ public class GenotyphiResult extends Jsonnable {
   private final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations;
   private final AggregatedAssignments data;
   private final Collection<MutationSearchResult> blastResults;
-  private final byte foundLoci;
+  private final int foundLoci;
 
 
   @SuppressWarnings("unused")
   private GenotyphiResult() {
 
-    this("", "", Collections.emptyList(), null, Collections.emptyList(), Byte.MAX_VALUE);
+    this("", "", Collections.emptyList(), null, Collections.emptyList(), Integer.MIN_VALUE);
   }
 
-  public GenotyphiResult(final String assemblyId, final String genotype, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final AggregatedAssignments data, final Collection<MutationSearchResult> blastResults, final byte foundLoci) {
-    this.assemblyId = assemblyId;
+  public GenotyphiResult(final String assemblyId, final String genotype, final Collection<Map.Entry<String, Collection<GenotyphiMutation>>> genotyphiMutations, final AggregatedAssignments data, final Collection<MutationSearchResult> blastResults, final int foundLoci) {
 
+    this.assemblyId = assemblyId;
     this.genotype = genotype;
     this.genotyphiMutations = genotyphiMutations;
     this.data = data;
@@ -57,7 +57,7 @@ public class GenotyphiResult extends Jsonnable {
     return this.blastResults;
   }
 
-  public byte getFoundLoci() {
+  public int getFoundLoci() {
 
     return this.foundLoci;
   }
